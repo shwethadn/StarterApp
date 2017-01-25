@@ -1,0 +1,7 @@
+<svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="40px" viewBox="0 0 800 800" xml:space="preserve">
+  <g id="UrTavla">
+    <circle style="fill:url(#toning);stroke:#010101;stroke-width:1;stroke-miterlimit:10;" cx="250" cy="250" r="60">
+    </circle>
+    <text x="31%" y="30%" text-anchor="middle" stroke="black" stroke-width="0px" dy=".9em">Discover</text>
+  </g>
+</svg>
