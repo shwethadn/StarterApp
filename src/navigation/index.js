@@ -18,6 +18,7 @@ import AppLaunch from '@containers/Launch/LaunchContainer';
 import Placeholder from '@components/general/Placeholder';
 import MainPage from '@containers/FirstPage/FirstPageView';
 import ProductList from '@containers/Products/ProductList/ProductsListView';
+import ProductDetails from '@containers/Products/ProductView';
 import AuthScenes from './auth';
 import TabsScenes from './tabs';
 
@@ -64,6 +65,11 @@ export default Actions.create(
       component={ProductList}
       analyticsDesc={'ProductList: Products'}
     />
-
+    <Scene
+      key={'productsView'}
+      title={'Product Details'}
+      component={ProductDetails}
+      analyticsDesc={'ProductDetails: Product Details'}
+    />
   </Scene>,
 );
