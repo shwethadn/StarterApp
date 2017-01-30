@@ -22,18 +22,18 @@ import { Actions, Scene } from 'react-native-router-flux';
 import { AppStyles } from '@theme/';
 
 // Components
-import {Card, Text, Spacer } from '@ui/';
+import {Card, Text, Spacer, Button } from '@ui/';
 
 /* Styles ==================================================================== */
 const styles = StyleSheet.create({
   favourite: {
     position: 'absolute',
-    width: 300,
-    height: 200,
+    width: 150,
+    height: 100,
   },
 });
 
-var customData = [
+var CartItems = [
   {
     id: 72514,
     name: "GODREJ Expert Liquid Hair Dye - Natural Black 1",
@@ -122,23 +122,23 @@ var customData = [
 ];
 
 /* Component ==================================================================== */
-class ProductList extends Component {
-  static componentName = 'ProductList';
+class MyCart extends Component {
+  static componentName = 'MyCart';
 
-  renderProducts() {
-    return customData.map(function(prod){
+  renderItmes() {
+    return CartItems.map(function(prod){
       return(
         <ScrollView style={[AppStyles.container]}>
           <Card>
             <TouchableOpacity activeOpacity={0.8} onPress={Actions.productsView}>
               <View style={{flex: 1, flexDirection: 'row'}}>
-                <View style={{width: 320, height: 200, backgroundColor: 'white'}}>
+                <View style={{width: 200, height: 100, backgroundColor: 'white'}}>
                   <Image
                     source={require('@images/blank_product.jpg')}
                     style={[styles.favourite]}
                   />
                 </View>
-                <View style={{width: 480, height: 200, backgroundColor: 'white'}}>
+                <View style={{width: 600, height: 100, backgroundColor: 'white'}}>
                   <Text h3>{prod.name}</Text>
                   <Text>{prod.description}</Text>
                   <Text>UOM: {prod.quantity}</Text>
@@ -147,7 +147,6 @@ class ProductList extends Component {
               </View>
             </TouchableOpacity>
           </Card>
-          <Spacer size={10} />
         </ScrollView>
       );
     });
@@ -155,15 +154,24 @@ class ProductList extends Component {
 
   render = () => {
     return (
-      <ScrollView style={[AppStyles.container]}>
-        <Spacer size={70} />
-        {this.renderProducts()}
-        {this.renderProducts()}
-        {this.renderProducts()}
-      </ScrollView>
+      <View style={[AppStyles.container]}>
+        <ScrollView>
+          <Spacer size={70} />
+          {this.renderItmes()}
+          {this.renderItmes()}
+        </ScrollView>
+        <Button
+          title={'Continue Shopping'}
+          onPress={Actions.productsList}
+        />
+        <Button
+          title={'CHECKOUT'}
+          onPress={Actions.productsList}
+        />
+      </View>
     );
   }
 }
 
 /* Export Component ==================================================================== */
-export default ProductList;
+export default MyCart;

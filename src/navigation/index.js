@@ -18,6 +18,8 @@ import AppLaunch from '@containers/Launch/LaunchContainer';
 import Placeholder from '@components/general/Placeholder';
 import MainPage from '@containers/FirstPage/FirstPageView';
 import ProductList from '@containers/Products/ProductList/ProductsListView';
+import ProductGrid from '@containers/Products/ProductList/ProductsGridView';
+import MyCart from '@containers/Cart/MyCartView';
 import ProductDetails from '@containers/Products/ProductView';
 import AuthScenes from './auth';
 import TabsScenes from './tabs';
@@ -71,5 +73,17 @@ export default Actions.create(
       component={ProductDetails}
       analyticsDesc={'ProductDetails: Product Details'}
     />
-  </Scene>,
+    <Scene
+      key={'productsGrid'}
+      title={'Product Grid view'}
+      component={ProductGrid}
+      analyticsDesc={'ProductGrid: Product Grid View'}
+    />
+    <Scene
+      key={'myCart'}
+      title={'My Cart'}
+      component={MyCart}
+      analyticsDesc={'MyCart: My Cart'}
+    />
+  </Scene>
 );

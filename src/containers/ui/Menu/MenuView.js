@@ -108,6 +108,10 @@ class Menu extends Component {
           title: 'Options',
           onPress: () => { this.props.closeSideMenu(); Actions.firstPage(); },
         },
+        {
+          title: 'Grid View',
+          onPress: () => { this.props.closeSideMenu(); Actions.productsGrid(); },
+        },
       ],
     };
   }

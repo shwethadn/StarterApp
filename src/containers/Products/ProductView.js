@@ -13,11 +13,13 @@ import {
   StyleSheet,
 } from 'react-native';
 
+import { Actions } from 'react-native-router-flux';
+
 // Consts and Libs
 import { AppStyles, AppSizes } from '@theme/';
 
 // Components
-import { Card, Spacer, Text } from '@ui/';
+import { Card, Spacer, Text, Button } from '@ui/';
 
 /* Styles ==================================================================== */
 const styles = StyleSheet.create({
@@ -72,50 +74,57 @@ class ProductDetails extends Component {
   render = () => {
 
     return (
-      <ScrollView style={[AppStyles.container]}>
-        <Spacer size={50} />
-        <Card>
-          <Text h2>{product.name}</Text>
-          <Text>Brand: {product.brand}</Text>
-          <Spacer size={10} />
-          <Image
-            source={require('@images/blank_product.jpg')}
-            style={[styles.logo]}
-          />
+      <View style={[AppStyles.container]}>
+        <ScrollView>
+          <Spacer size={50} />
+          <Card>
+            <Text h2>{product.name}</Text>
+            <Text>Brand: {product.brand}</Text>
+            <Spacer size={10} />
+            <Image
+              source={require('@images/blank_product.jpg')}
+              style={[styles.logo]}
+            />
+            <Spacer size={20} />
+            <View style={{flex: 1, flexDirection: 'row'}}>
+              <View style={{width: 180, height: 180, backgroundColor: 'white'}}>
+                <Image
+                  source={require('@images/logo.png')}
+                  style={[styles.favourite]}
+                />
+              </View>
+              <View style={{width: 180, height: 180, backgroundColor: 'white'}}>
+                <Image
+                  source={require('@images/logo.png')}
+                  style={[styles.favourite]}
+                />
+              </View>
+              <View style={{width: 180, height: 180, backgroundColor: 'white'}}>
+                <Image
+                  source={require('@images/logo.png')}
+                  style={[styles.favourite]}
+                />
+              </View>
+              <View style={{width: 180, height: 180, backgroundColor: 'white'}}>
+                <Image
+                  source={require('@images/logo.png')}
+                  style={[styles.favourite]}
+                />
+              </View>
+            </View>
+            <Text>UOM: {product.quantity}</Text>
+            <Text>Description: {product.description}</Text>
+            <Text>Price: {product.price}/-</Text>
+            <Spacer size={10} />
+          </Card>
           <Spacer size={20} />
-          <View style={{flex: 1, flexDirection: 'row'}}>
-            <View style={{width: 180, height: 180, backgroundColor: 'white'}}>
-              <Image
-                source={require('@images/logo.png')}
-                style={[styles.favourite]}
-              />
-            </View>
-            <View style={{width: 180, height: 180, backgroundColor: 'white'}}>
-              <Image
-                source={require('@images/logo.png')}
-                style={[styles.favourite]}
-              />
-            </View>
-            <View style={{width: 180, height: 180, backgroundColor: 'white'}}>
-              <Image
-                source={require('@images/logo.png')}
-                style={[styles.favourite]}
-              />
-            </View>
-            <View style={{width: 180, height: 180, backgroundColor: 'white'}}>
-              <Image
-                source={require('@images/logo.png')}
-                style={[styles.favourite]}
-              />
-            </View>
-          </View>
-          <Text>UOM: {product.quantity}</Text>
-          <Text>Description: {product.description}</Text>
-        </Card>
-
-        <Spacer size={20} />
-      
-      </ScrollView>
+        </ScrollView>
+        <Button
+          title={'ADD TO CART'}
+          onPress={Actions.myCart}
+        />
+        <Spacer size={10} />
+      </View>
     );
   }
 }

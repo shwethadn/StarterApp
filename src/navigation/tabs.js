@@ -20,6 +20,7 @@ import Placeholder from '@components/general/Placeholder';
 import StyleGuide from '@containers/StyleGuideView';
 import Recipes from '@containers/recipes/Browse/BrowseContainer';
 import RecipeView from '@containers/recipes/RecipeView';
+import ProductGrid from '@containers/Products/ProductList/ProductsGridView';
 
 const navbarPropsTabs = {
   ...AppConfig.navbarProps,
@@ -62,6 +63,13 @@ const scenes = (
       component={Placeholder}
       icon={props => TabIcon({ ...props, icon: 'timeline' })}
       analyticsDesc={'Placeholder: Coming Soon'}
+    />
+
+    <Scene
+      key={'productsgrid'}
+      title={'Product Grid view'}
+      component={ProductGrid}
+      analyticsDesc={'ProductGrid: Product Grid View'}
     />
 
     <Scene

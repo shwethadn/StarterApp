@@ -11,25 +11,26 @@ import {
   StyleSheet,
   TouchableOpacity,
   ScrollView,
+  Image,
 } from 'react-native';
 import { Icon } from 'react-native-elements';
+import { Actions } from 'react-native-router-flux';
 
 // Consts and Libs
 import { AppStyles } from '@theme/';
 
+import {Card, Text, Spacer } from '@ui/';
+import GridView from 'react-native-grid-view'
+
 /* Styles ==================================================================== */
 const styles = StyleSheet.create({
-  list: {
-      justifyContent: 'center',
-      flexDirection: 'row',
-      flexWrap: 'wrap'
+  listView: {
+    paddingTop: 60,
   },
-  item: {
-      backgroundColor: '#CCC',
-      margin: 10,
-      width: 100,
-      height: 100
-  }
+  thumbnail: {
+    width: 220,
+    height: 120,
+  },
 });
 
 var customData = [
@@ -63,7 +64,7 @@ var customData = [
   },
   {
     id: 72515,
-    name: "GODREJ Expert Liquid Hair Dye - Natural Black 1", 
+    name: "GODREJ Expert Liquid Hair Dye - Natural Black 2", 
     description: "NA", 
     is_active: true, 
     company_code: "NA",
@@ -124,36 +125,34 @@ var customData = [
 class ProductGrid extends Component {
   static componentName = 'ProductGrid';
 
-  renderGridProducts() {
+  renderItem(item) {
     return customData.map(function(prod, i){
-      // return(
-      //   <TouchableOpacity activeOpacity={0.8}>
-      //     <Card image={require('@images/blank_product.jpg')}>
-      //       <View style={[AppStyles.paddingBottomSml]}>
-      //         <Text h3>{prod.name}</Text>
-      //         <Text>{prod.description}</Text>
-      //       </View>
-      //     </Card>
-      //   </TouchableOpacity>
-      // );
-
-      var GridLayoutExample = React.createClass({
-      // ...
-      render: function() {
-        return (
-          <ListView contentContainerStyle={styles.list}
-            dataSource={require('@images/blank_product.jpg')}
-            renderRow={(prod.name) => <Text style={styles.item}>{prod.name}</Text>}
-          />
-        );
-      }
+      return(
+        <TouchableOpacity activeOpacity={0.8} onPress={Actions.productsView}>
+          <Card image={require('@images/blank_product.jpg')}>
+            <View style={[AppStyles.paddingBottomSml]}>
+              <View style={styles.thumbnail}>
+                <Text h3>{prod.name}</Text>
+                <Text>{prod.description}</Text>
+                <Text>UOM: {prod.quantity}</Text>
+                <Text>Price: {prod.price}</Text>
+              </View>
+            </View>
+          </Card>
+        </TouchableOpacity>
+      );
     });
   }
 
   render = () => {
     return (
       <ScrollView style={[AppStyles.container]}>
-        {this.renderGridProducts()}
+        <GridView
+          items={customData}
+          itemsPerRow={1}
+          renderItem={this.renderItem}
+          style={styles.listView}
+        />
       </ScrollView>
     );
   }

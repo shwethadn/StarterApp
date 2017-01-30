@@ -63,37 +63,6 @@ class ProductList extends Component {
     });
   }
 
-  /**
-    * Data from API is a bit messy - clean it up here
-    */
-  // parseRecipeData = (data) => {
-  //   const recipe = data;
-  //   const { title, content } = data;
-  //   const featuredImg = data.better_featured_image;
-  //   title.rendered = AppUtil.htmlEntitiesDecode(title.rendered);
-
-  //   // Produce a summary
-  //   content.rendered = AppUtil.htmlEntitiesDecode(content.rendered);
-  //   content.rendered = AppUtil.stripTags(content.rendered);
-  //   const summary = AppUtil.limitChars(content.rendered, 60);
-
-  //   // Is there a better way to test this?
-  //   recipe.featured_image = (
-  //     featuredImg &&
-  //     featuredImg.media_details &&
-  //     featuredImg.media_details.sizes &&
-  //     featuredImg.media_details.sizes.medium &&
-  //     featuredImg.media_details.sizes.medium.source_url
-  //   ) ?
-  //     featuredImg.media_details.sizes.medium.source_url : '';
-
-  //   return {
-  //     image: recipe.featured_image,
-  //     title: title.rendered,
-  //     content: summary,
-  //   };
-  // }
-
   render = () => {
     const { product } = this.data;
 
