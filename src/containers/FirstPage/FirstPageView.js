@@ -49,7 +49,7 @@ class MainPage extends Component {
 
           <Button
             title={'PLANNER'}
-            onPress={Actions.login}
+            onPress={Actions.app}
           />
           <Spacer size={30} />
 
