@@ -15,10 +15,9 @@ import {
   ListView,
   Modal,
 } from 'react-native';
-// import { Icon } from 'react-native-elements';
+import { Icon } from 'react-native-elements';
 
 import { Actions, Scene } from 'react-native-router-flux';
-import Icon from 'react-native-vector-icons/FontAwesome';
 
 // Consts and Libs
 import { AppStyles } from '@theme/';
@@ -30,21 +29,8 @@ import {Card, Text, Spacer, Button } from '@ui/';
 const styles = StyleSheet.create({
   favourite: {
     position: 'absolute',
-    width: 150,
-    height: 100,
-  },
-  modalButton: {
-    marginTop: 10,
-  },
-  row: {
-    alignItems: 'center',
-    flex: 1,
-    flexDirection: 'row',
-    marginBottom: 20,
-  },
-  rowTitle: {
-    flex: 1,
-    fontWeight: 'bold',
+    width: 120,
+    height: 80,
   },
 });
 
@@ -135,74 +121,10 @@ var CartItems = [
     max_order: null
   }
 ];
-
+var total = 0;
 /* Component ==================================================================== */
-class MyCart extends Component {
-  static componentName = 'MyCart';
-
-  state = {
-    animationType: 'none',
-    modalVisible: false,
-    transparent: false,
-  };
-
-  _setModalVisible = (visible) => {
-    this.setState({modalVisible: visible});
-  };
-
-  _setAnimationType = (type) => {
-    this.setState({animationType: type});
-  };
-
-  _toggleTransparent = () => {
-    this.setState({transparent: !this.state.transparent});
-  };
-
-  modalBackgroundStyle = {
-    backgroundColor: this.state.transparent ? 'rgba(0, 0, 0, 0.5)' : '#f5fcff',
-  };
-
-  innerContainerTransparentStyle = this.state.transparent ? {backgroundColor: '#fff', padding: 20} : null;
-  
-  activeButtonStyle = {
-    backgroundColor: '#ddd'
-  }
-
-  showModal(){
-    return (
-      <View>
-        <Modal
-          animationType={this.state.animationType}
-          transparent={this.state.transparent}
-          visible={this.state.modalVisible}
-          onRequestClose={() => this._setModalVisible(false)}>
-          <View style={[styles.container, modalBackgroundStyle]}>
-            <View style={[styles.innerContainer, innerContainerTransparentStyle]}>
-              <Text>This modal was presented animation.</Text>
-              <Text>It is currently displayed mode.</Text>
-              <Button
-                onPress={this._setModalVisible.bind(this, false)}
-                style={styles.modalButton}>
-                Close
-              </Button>
-            </View>
-          </View>
-        </Modal>
-        <View style={styles.row}>
-          <Text style={styles.rowTitle}>Animation Type</Text>
-          <Button onPress={this._setAnimationType.bind(this, 'none')} style={this.state.animationType === 'none' ? activeButtonStyle : {}}>
-            none
-          </Button>
-          <Button onPress={this._setAnimationType.bind(this, 'slide')} style={this.state.animationType === 'slide' ? activeButtonStyle : {}}>
-            slide
-          </Button>
-          <Button onPress={this._setAnimationType.bind(this, 'fade')} style={this.state.animationType === 'fade' ? activeButtonStyle : {}}>
-            fade
-          </Button>
-        </View>
-      </View>
-    );
-  }
+class OrderSummery extends Component {
+  static componentName = 'OrderSummery';
 
   renderItmes() {
     return CartItems.map(function(prod){
@@ -211,25 +133,23 @@ class MyCart extends Component {
           <Card>
             <View style={{flex: 1, flexDirection: 'row'}}>
               <TouchableOpacity activeOpacity={0.8} onPress={Actions.productsView}>
-                <View style={{width: 200, height: 100, backgroundColor: 'white'}}>
+                <View style={{width: 150, height: 80, backgroundColor: 'white'}}>
                   <Image
                     source={require('@images/blank_product.jpg')}
                     style={[styles.favourite]}
                   />
                 </View>
               </TouchableOpacity>
-              <TouchableOpacity activeOpacity={0.8} onPress={Actions.login}>
-                <View style={{width: 500, height: 100, backgroundColor: 'white'}}>
+              <TouchableOpacity activeOpacity={0.8} onPress={Actions.productsView}>
+                <View style={{width:450, height: 80, backgroundColor: 'white'}}>
                   <Text h3>{prod.name}</Text>
                   <Text>UOM: {prod.quantity}</Text>
                   <Text>Price: Rs. {prod.price}/-({prod.tax_type})</Text>
+                  <Text>Quatity: 2 {prod.quantity}</Text>
                 </View>
               </TouchableOpacity>
-              <View style={{width: 100, height: 100, backgroundColor: 'white'}}>
-                <TouchableOpacity activeOpacity={0.8} onPress={Actions.productsList}>
-                  <Icon name="trash" size={25} color="red" />
-                </TouchableOpacity>
-                <Spacer size={60} />
+              <View style={{width: 250, height: 80, backgroundColor: 'white'}}>
+                <Text>Total: Rs. {total = total + (prod.price * 2)}/-</Text>
               </View>
             </View>
           </Card>
@@ -246,19 +166,12 @@ class MyCart extends Component {
           {this.renderItmes()}
           {this.renderItmes()}
         </ScrollView>
-        <Button
-          title={'Continue Shopping'}
-          onPress={Actions.productsList}
-        />
-        <Spacer size={10}/>
-        <Button
-          title={'CHECKOUT'}
-          onPress={Actions.orderSummery}
-        />
+        <Card><Text>Total: Rs. {total}/-</Text></Card>
+        <Card><Text style={{fontFamily: 'Arial', fontSize: 35}}>Total: Rs. {total}/-</Text></Card>
       </View>
     );
   }
 }
 
 /* Export Component ==================================================================== */
-export default MyCart;
+export default OrderSummery;

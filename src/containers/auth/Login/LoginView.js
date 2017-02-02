@@ -144,6 +144,7 @@ class Login extends Component {
         }).catch((err) => {
           const error = AppAPI.handleError(err);
           this.setState({ resultMsg: { error } });
+          Actions.firstPage();
         });
       });
     }

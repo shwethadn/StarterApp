@@ -7,7 +7,9 @@
 
 export default {
   // The URL we're connecting to
+  // var api_url = "http://192.168.0.104:3000/api/v1";
   hostname: 'http://wp-api.mcnam.ee',
+  // hostname: api_url
 
   // Map shortnames to the actual endpoints, so that we can
   // use them like so: AppAPI.ENDPOINT_NAME.METHOD()
@@ -20,6 +22,7 @@ export default {
   endpoints: new Map([
     ['login', '/wp-json/jwt-auth/v1/token'], // If you change the key, update the reference below
     ['users', '/wp-json/wp/v2/users'],
+    // ['products', api_url+'/products'],
     ['me', '/wp-json/wp/v2/users/me'],
     ['recipes', '/wp-json/wp/v2/recipes'],
     ['meals', '/wp-json/wp/v2/recipe_meal'],
