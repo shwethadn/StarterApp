@@ -22,6 +22,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 // Consts and Libs
 import { AppStyles } from '@theme/';
+import AppAPI from '@lib/api';
 
 // Components
 import {Card, Text, Spacer, Button } from '@ui/';

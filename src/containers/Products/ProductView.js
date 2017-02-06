@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 
 import { Actions } from 'react-native-router-flux';
+import AppAPI from '@lib/api';
 
 // Consts and Libs
 import { AppStyles, AppSizes } from '@theme/';
@@ -37,47 +38,29 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
 });
-
-const product = {
-  id: 72516, 
-  name: "MEGAGLIPTIN TAB", 
-  description: "NA", 
-  is_active: true, 
-  company_code: "636054", 
-  price: 70.0, 
-  unit_rate: 0.0, 
-  quantity: "Strip", 
-  created_by: 1311, 
-  modified_by: null, 
-  image_path: null, 
-  packing_id: 237, 
-  color_id: 25, 
-  manufacturer_id: 206, 
-  product_type: "Drug", 
-  brand: "ALEMBIC MEGACARE", 
-  tax_on: "MRP", 
-  banned: false, 
-  tax_type: "incl of tax", 
-  is_out_of_stock: false, 
-  size: "", 
-  return_days: 7, 
-  refrigerated_item: false, 
-  out_of_stock_at: null, 
-  min_order: 1, 
-  max_order: null
-};
+var product = "";
 
 /* Component ==================================================================== */
 class ProductDetails extends Component {
   static componentName = 'ProductDetails';
 
-  render = () => {
+  prodinfo(){
+    fetch("http://192.168.0.113:3000/api/v1/products/"+this.props.prod_id, {method: "GET"})
+    .then((response) => response.json())
+    .then((responseData) => {
+     product = responseData;
+    }).done()
+    return (product);
+  }
 
+  render = () => {
+    product = this.prodinfo();
     return (
       <View style={[AppStyles.container]}>
         <ScrollView>
           <Spacer size={50} />
           <Card>
+            
             <Text h2>{product.name}</Text>
             <Text>Brand: {product.brand}</Text>
             <Spacer size={10} />
@@ -113,6 +96,7 @@ class ProductDetails extends Component {
               </View>
             </View>
             <Text>UOM: {product.quantity}</Text>
+            <Text>product id: {this.props.prod_id}</Text>
             <Text>Description: {product.description}</Text>
             <Text>Price: {product.price}/-</Text>
             <Spacer size={10} />

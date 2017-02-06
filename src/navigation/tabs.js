@@ -16,11 +16,14 @@ import { TabIcon } from '@ui/';
 import { NavbarMenuButton } from '@containers/ui/NavbarMenuButton/NavbarMenuButtonContainer';
 
 // Scenes
+import Icon from 'react-native-vector-icons/FontAwesome';
 import Placeholder from '@components/general/Placeholder';
 import StyleGuide from '@containers/StyleGuideView';
 import Recipes from '@containers/recipes/Browse/BrowseContainer';
 import RecipeView from '@containers/recipes/RecipeView';
 import ProductGrid from '@containers/Products/ProductList/ProductsGridView';
+import MainPage from '@containers/FirstPage/FirstPageView';
+import ProductDetails from '@containers/Products/ProductView';
 
 const navbarPropsTabs = {
   ...AppConfig.navbarProps,
@@ -36,23 +39,30 @@ const scenes = (
   <Scene key={'tabBar'} tabs tabBarIconContainerStyle={AppStyles.tabbar} pressOpacity={0.95}>
     <Scene
       {...navbarPropsTabs}
-      key={'recipes'}
-      title={'Recipes'}
+      key={'options'}
+      title={'stapp'}
       icon={props => TabIcon({ ...props, icon: 'search' })}
     >
       <Scene
         {...navbarPropsTabs}
-        key={'recipesListing'}
-        component={Recipes}
+        key={'firstPage'}
+        component={MainPage}
         title={AppConfig.appName}
-        analyticsDesc={'Recipes: Browse Recipes'}
+        analyticsDesc={'MainPage: FirstPage'}
       />
+
       <Scene
-        {...AppConfig.navbarProps}
-        key={'recipeView'}
-        component={RecipeView}
-        getTitle={props => ((props.title) ? props.title : 'View Recipe')}
-        analyticsDesc={'RecipeView: View Recipe'}
+        key={'productsGrid'}
+        title={AppConfig.appName}
+        component={ProductGrid}
+        analyticsDesc={'ProductGrid: Product Grid View'}
+      />
+
+      <Scene
+        key={'productsView'}
+        title={'Product Details'}
+        component={ProductDetails}
+        analyticsDesc={'ProductDetails: Product Details'}
       />
     </Scene>
 
@@ -63,13 +73,6 @@ const scenes = (
       component={Placeholder}
       icon={props => TabIcon({ ...props, icon: 'timeline' })}
       analyticsDesc={'Placeholder: Coming Soon'}
-    />
-
-    <Scene
-      key={'productsgrid'}
-      title={'Product Grid view'}
-      component={ProductGrid}
-      analyticsDesc={'ProductGrid: Product Grid View'}
     />
 
     <Scene

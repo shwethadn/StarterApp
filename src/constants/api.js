@@ -4,11 +4,18 @@
  * React Native Starter App
  * https://github.com/mcnamee/react-native-starter-app
  */
-
 export default {
+  // productList: fetch("http://192.168.0.113:3000/api/v1/products", {method: "GET"})
+  // .then((response) => response.json())
+  // .then((responseData) => {
+  //   console.log("PRODUCT LIST DATA");
+  //   console.log(responseData);
+  //  return responseData;
+  // }).done(),
+
   // The URL we're connecting to
-  // var api_url = "http://192.168.0.104:3000/api/v1";
   hostname: 'http://wp-api.mcnam.ee',
+  // hostname: 'http://192.168.0.113:3000/api/v1',
   // hostname: api_url
 
   // Map shortnames to the actual endpoints, so that we can
@@ -22,7 +29,7 @@ export default {
   endpoints: new Map([
     ['login', '/wp-json/jwt-auth/v1/token'], // If you change the key, update the reference below
     ['users', '/wp-json/wp/v2/users'],
-    // ['products', api_url+'/products'],
+    ['products', 'http://192.168.0.113:3000/api/v1/products'],
     ['me', '/wp-json/wp/v2/users/me'],
     ['recipes', '/wp-json/wp/v2/recipes'],
     ['meals', '/wp-json/wp/v2/recipe_meal'],

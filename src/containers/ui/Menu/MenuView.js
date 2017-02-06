@@ -94,7 +94,7 @@ class Menu extends Component {
       menu: [
         {
           title: 'Recipes',
-          onPress: () => { this.props.closeSideMenu(); Actions.app(); },
+          onPress: () => { this.props.closeSideMenu(); Actions.recipesListing(); },
         },
         {
           title: 'Example Link',
