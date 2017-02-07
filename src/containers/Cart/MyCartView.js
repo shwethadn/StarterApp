@@ -14,6 +14,7 @@ import {
   Image,
   ListView,
   Modal,
+  TextInput,
 } from 'react-native';
 // import { Icon } from 'react-native-elements';
 
@@ -46,6 +47,9 @@ const styles = StyleSheet.create({
   rowTitle: {
     flex: 1,
     fontWeight: 'bold',
+  },
+  twoButtonView: {
+    flexDirection: 'row',
   },
 });
 
@@ -141,6 +145,11 @@ var CartItems = [
 class MyCart extends Component {
   static componentName = 'MyCart';
 
+  constructor(props) {
+    super(props);
+    this.state = { search: "" };
+  }
+
   state = {
     animationType: 'none',
     modalVisible: false,
@@ -207,11 +216,12 @@ class MyCart extends Component {
 
   renderItmes() {
     return CartItems.map(function(prod){
+      const goDetailsPage = () => Actions.productsView({prod_id: prod.id});
       return(
         <ScrollView style={[AppStyles.container]}>
           <Card>
             <View style={{flex: 1, flexDirection: 'row'}}>
-              <TouchableOpacity activeOpacity={0.8} onPress={Actions.productsView}>
+              <TouchableOpacity activeOpacity={0.8} onPress={goDetailsPage}>
                 <View style={{width: 200, height: 100, backgroundColor: 'white'}}>
                   <Image
                     source={require('@images/blank_product.jpg')}
@@ -240,16 +250,29 @@ class MyCart extends Component {
   }
 
   render = () => {
+    const goSearchPage = () => Actions.productsGrid({search: this.state.search});
     return (
       <View style={[AppStyles.container]}>
+        <Spacer size={50} />
+        <Card>
+          <View style={styles.twoButtonView}>
+            <TextInput
+              style={{height: 40, borderColor: 'gray', width: 600}}
+              onChangeText={(search) => this.setState({search})}
+              value={this.state.search}
+            />
+            <TouchableOpacity activeOpacity={0.8} onPress={goSearchPage}>
+              <Icon name="search" size={30} color="blue" />
+            </TouchableOpacity>
+          </View>
+        </Card>
         <ScrollView>
-          <Spacer size={70} />
           {this.renderItmes()}
           {this.renderItmes()}
         </ScrollView>
         <Button
           title={'Continue Shopping'}
-          onPress={Actions.productsList}
+          onPress={Actions.productsGrid}
         />
         <Spacer size={10}/>
         <Button

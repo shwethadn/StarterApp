@@ -102,7 +102,7 @@ class Menu extends Component {
         },
         {
           title: 'Products',
-          onPress: () => { this.props.closeSideMenu(); Actions.productsList(); },
+          onPress: () => { this.props.closeSideMenu(); Actions.app(); },
         },
         {
           title: 'Options',

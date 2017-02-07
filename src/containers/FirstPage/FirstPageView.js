@@ -43,13 +43,13 @@ class MainPage extends Component {
         <View style={[AppStyles.containerCentered, AppStyles.container, styles.background]}>
           <Button
             title={'DISCOVER'}
-            onPress={Actions.productsList}
+            onPress={Actions.app}
           />
           <Spacer size={30} />
 
           <Button
             title={'PLANNER'}
-            onPress={Actions.app}
+            onPress={Actions.recipesListing}
           />
           <Spacer size={30} />
 

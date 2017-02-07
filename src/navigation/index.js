@@ -58,50 +58,52 @@ export default Actions.create(
         component={Placeholder}
         analyticsDesc={'Placeholder: Coming Soon'}
       />
-
-      <Scene
-        key={'productsList'}
-        title={'Products'}
-        component={ProductList}
-        rightTitle={<Icon name="th" size={30} color="white" />}
-        onRight={()=>Actions.productsGrid()}
-        analyticsDesc={'ProductList: Products'}
-      />
-
-      <Scene
-        key={'productsView'}
-        title={'Product Details'}
-        component={ProductDetails}
-        rightTitle={<Icon name="th" size={30} color="white" />}
-        onRight={()=>Actions.productsGrid()}
-        analyticsDesc={'ProductDetails: Product Details'}
-      />
-
-      <Scene
-        key={'productsGrid'}
-        title={'Product Grid view'}
-        component={ProductGrid}
-        rightTitle={<Icon name="th-list" size={30} color="white" />}
-        onRight={()=>Actions.productsList()}
-        analyticsDesc={'ProductGrid: Product Grid View'}
-      />
-      <Scene
-        key={'myCart'}
-        rightTitle={<Icon name="cart-plus" size={30} color="white" />}
-        onRight={()=>Actions.login()}
-        title={'MY CART'}
-        component={MyCart}
-        analyticsDesc={'MyCart: My Cart'}
-      />
-      <Scene
-        key={'orderSummery'}
-        rightTitle={<Icon name="cart-plus" size={30} color="white" />}
-        onRight={()=>Actions.myCart()}
-        title={'Order Summery'}
-        component={OrderSummery}
-        analyticsDesc={'OrderSummery: Order Summery'}
-      />
     </Scene>
+
+    <Scene
+      key={'productsView'}
+      title={'Product Details'}
+      component={ProductDetails}
+      rightTitle={<Icon name="th" size={30} color="white" />}
+      onRight={()=>Actions.productsGrid()}
+      analyticsDesc={'ProductDetails: Product Details'}
+    />
+
+    <Scene
+      key={'productsGrid'}
+      title={'Product Grid view'}
+      component={ProductGrid}
+      rightTitle={<Icon name="th-list" size={30} color="white" />}
+      onRight={()=>Actions.app()}
+      analyticsDesc={'ProductGrid: Product Grid View'}
+    />
+
+    <Scene
+      key={'myCart'}
+      rightTitle={<Icon name="cart-plus" size={30} color="white" />}
+      onRight={()=>Actions.login()}
+      title={'MY CART'}
+      component={MyCart}
+      analyticsDesc={'MyCart: My Cart'}
+    />
+
+    <Scene
+      key={'orderSummery'}
+      rightTitle={<Icon name="cart-plus" size={30} color="white" />}
+      onRight={()=>Actions.myCart()}
+      title={'Order Summery'}
+      component={OrderSummery}
+      analyticsDesc={'OrderSummery: Order Summery'}
+    />
+
+    <Scene
+      key={'firstPage'}
+      component={MainPage}
+      title={AppConfig.appName}
+      rightTitle={<Icon name="cart-plus" size={30} color="white" />}
+      onRight={()=>Actions.myCart()}
+      analyticsDesc={'MainPage: FirstPage'}
+    />
     
     <Scene
       {...AppConfig.navbarProps}
@@ -110,6 +112,7 @@ export default Actions.create(
       title={AppConfig.appName}
       analyticsDesc={'Recipes: Browse Recipes'}
     />
+
     <Scene
       {...AppConfig.navbarProps}
       key={'recipeView'}

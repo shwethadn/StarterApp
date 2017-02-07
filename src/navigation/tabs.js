@@ -5,7 +5,7 @@
  * https://github.com/mcnamee/react-native-starter-app
  */
 import React from 'react';
-import { Scene } from 'react-native-router-flux';
+import {Actions, Scene } from 'react-native-router-flux';
 
 // Consts and Libs
 import { AppConfig } from '@constants/';
@@ -22,8 +22,8 @@ import StyleGuide from '@containers/StyleGuideView';
 import Recipes from '@containers/recipes/Browse/BrowseContainer';
 import RecipeView from '@containers/recipes/RecipeView';
 import ProductGrid from '@containers/Products/ProductList/ProductsGridView';
-import MainPage from '@containers/FirstPage/FirstPageView';
 import ProductDetails from '@containers/Products/ProductView';
+import ProductList from '@containers/Products/ProductList/ProductsListView';
 
 const navbarPropsTabs = {
   ...AppConfig.navbarProps,
@@ -41,21 +41,16 @@ const scenes = (
       {...navbarPropsTabs}
       key={'options'}
       title={'stapp'}
-      icon={props => TabIcon({ ...props, icon: 'search' })}
-    >
-      <Scene
-        {...navbarPropsTabs}
-        key={'firstPage'}
-        component={MainPage}
-        title={AppConfig.appName}
-        analyticsDesc={'MainPage: FirstPage'}
-      />
+      icon={props => TabIcon({ ...props, icon: 'search' })}>
 
       <Scene
-        key={'productsGrid'}
-        title={AppConfig.appName}
-        component={ProductGrid}
-        analyticsDesc={'ProductGrid: Product Grid View'}
+        {...navbarPropsTabs}
+        key={'productsList'}
+        component={ProductList}
+        title={"Products"}
+        rightTitle={<Icon name="th" size={30} color="white" />}
+        onRight={()=>Actions.productsGrid()}
+        analyticsDesc={'ProductList: Products'}
       />
 
       <Scene

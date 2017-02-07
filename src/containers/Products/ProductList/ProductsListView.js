@@ -13,8 +13,10 @@ import {
   ScrollView,
   Image,
   ListView,
+  TextInput,
+  Button,
 } from 'react-native';
-import { Icon } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { Actions, Scene } from 'react-native-router-flux';
 import AppAPI from '@lib/api';
@@ -33,23 +35,40 @@ const styles = StyleSheet.create({
     width: 300,
     height: 200,
   },
+  twoButtonView: {
+    flexDirection: 'row',
+  },
 });
 
-fetch("http://192.168.0.113:3000/api/v1/products", {method: "GET"})
-.then((response) => response.json())
-.then((responseData) => {
- productData = responseData;
+url = "http://192.168.0.113:3000/api/v1/products";
+fetch(url, {method: "GET"}).then((response) => response.json())
+  .then((responseData) => {
+  productData = responseData;
 }).done();
+
+var products = "";
 
 /* Component ==================================================================== */
 class ProductList extends Component {
   static componentName = 'ProductList';
 
+  constructor(props) {
+    super(props);
+    this.state = { search: '', products: ''}
+    if (this.props.search != "" & this.props.search != undefined){
+      this.state = {search: this.props.search};
+      url = url+"?search="+this.state.search;
+    }
+    fetch(url, {method: "GET"}).then((response) => response.json())
+      .then((responseData) => {
+      products = responseData;
+    }).done();
+    this.state.products = products["products"];
+  }
+
   renderProducts() {
     if (productData["products"] != undefined){
       return productData["products"].map(function(prod){
-        console.log("PRODUT ID");
-        console.log(prod.id);
         const goDetailsPage = () => Actions.productsView({prod_id: prod.id}); 
         return(
           <ScrollView style={[AppStyles.container]}>
@@ -81,11 +100,54 @@ class ProductList extends Component {
   }
 
   render = () => {
+    const goSearchPage = () => Actions.productsGrid({search: this.state.search});
     return (
-      <ScrollView style={[AppStyles.container]}>
-        <Spacer size={70} />
-        {this.renderProducts()}
-      </ScrollView>
+      <View style={[AppStyles.container]}>
+        <Card>
+          <View style={styles.twoButtonView}>
+            <TextInput
+              style={{height: 40, borderColor: 'gray', width: 600}}
+              onChangeText={(search) => this.setState({search})}
+              value={this.state.search}
+            />
+            <TouchableOpacity activeOpacity={0.8} onPress={goSearchPage}>
+              <Icon name="search" size={30} color="blue" />
+            </TouchableOpacity>
+          </View>
+        </Card>
+        <ScrollView>
+          {this.renderProducts()}
+        </ScrollView>
+        <Card>
+          <View style={styles.twoButtonView}>
+            <Button
+              large
+              outlined
+              iconRight
+              title={'FILTER'}
+              icon={{ name: 'cached' }}
+              onPress={Actions.comingSoon}
+            />
+            <Button
+              small
+              outlined
+              iconRight
+              title={'RANGESORT'}
+              icon={{ name: 'cached' }}
+              onPress={Actions.comingSoon}
+            />
+            <Button
+              small
+              outlined
+              iconRight
+              title={'Sort'}
+              icon={{ name: 'cached' }}
+              onPress={Actions.comingSoon}
+            />
+            <Spacer size={10} />
+          </View>
+        </Card>
+      </View>
     );
   }
 }

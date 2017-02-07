@@ -45,7 +45,7 @@ class Authenticate extends Component {
     <View style={[AppStyles.containerCentered, AppStyles.container, styles.background]}>
       <TouchableOpacity
         activeOpacity={0.8}
-        onPress={Actions.app}
+        onPress={Actions.firstPage}
         style={[styles.favourite]}>
           <Image
             source={require('@images/logo.png')}
