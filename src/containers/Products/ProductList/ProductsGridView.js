@@ -36,6 +36,12 @@ const styles = StyleSheet.create({
   twoButtonView: {
     flexDirection: 'row',
   },
+  tile: {
+    height: 250,
+    flex: 1,
+    alignItems: 'center',
+    flexDirection: 'column',
+  },
 });
 
 var url = "http://192.168.0.113:3000/api/v1/products";
@@ -48,16 +54,15 @@ var customData = fetch(url, {method: "GET"})
 
 class Grid extends Component{
   render() {
-    const goDetailsPage = () => Actions.productsView({prod_id: this.props.prod.id});
+    var p = this.props.prod;
+    const goDetailsPage = () => Actions.productsView({prod_id: p.id});
     return (
-      <TouchableOpacity activeOpacity={0.8} onPress={goDetailsPage}>
-        <Card image={require('@images/blank_product.jpg')}>
-          <View style={[AppStyles.paddingBottomSml]}>
-            <View style={styles.thumbnail}>
-              <Text h3>{this.props.prod.name}</Text>
-              <Text>UOM: {this.props.prod.quantity}</Text>
-              <Text>Price: {this.props.prod.price}</Text>
-            </View>
+      <TouchableOpacity key={p.id} activeOpacity={0.8} onPress={goDetailsPage} style={styles.tile}>
+        <Card image={require('@images/blank_product.jpg')} style={styles.thumbnail}>
+          <View style={styles.thumbnail}>
+            <Text h3>{p.name}</Text>
+            <Text>UOM: {p.quantity}</Text>
+            <Text>Price: {p.price}</Text>
           </View>
         </Card>
       </TouchableOpacity>
@@ -91,7 +96,7 @@ class ProductGrid extends Component {
   }
 
   renderItem(item) {
-    return <Grid prod = {item} />
+    return <Grid prod = {item} key={item.id} />
   }
 
   render = () => {

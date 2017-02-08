@@ -14,9 +14,9 @@ import {
   Image,
   ListView,
   TextInput,
-  Button,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { SearchBar } from 'react-native-elements'
 
 import { Actions, Scene } from 'react-native-router-flux';
 import AppAPI from '@lib/api';
@@ -26,13 +26,13 @@ import { APIConfig } from '@constants/';
 import { AppStyles } from '@theme/';
 
 // Components
-import {Card, Text, Spacer } from '@ui/';
+import {Card, Text, Spacer, Button } from '@ui/';
 
 /* Styles ==================================================================== */
 const styles = StyleSheet.create({
   favourite: {
     position: 'absolute',
-    width: 300,
+    width: 280,
     height: 200,
   },
   twoButtonView: {
@@ -45,6 +45,8 @@ fetch(url, {method: "GET"}).then((response) => response.json())
   .then((responseData) => {
   productData = responseData;
 }).done();
+
+var Accordion = require('react-native-accordion');
 
 var products = "";
 
@@ -71,23 +73,34 @@ class ProductList extends Component {
       return productData["products"].map(function(prod){
         const goDetailsPage = () => Actions.productsView({prod_id: prod.id}); 
         return(
-          <ScrollView style={[AppStyles.container]}>
+          <ScrollView key={prod.id} style={[AppStyles.container]}>
             <Card>
               <TouchableOpacity activeOpacity={0.8} onPress={goDetailsPage}>
                 <View style={{flex: 1, flexDirection: 'row'}}>
-                  <View style={{width: 320, height: 200, backgroundColor: 'white'}}>
+                  <View style={{width: 300, height: 200, backgroundColor: 'white'}}>
                     <Image
                       source={require('@images/blank_product.jpg')}
                       style={[styles.favourite]}
                     />
                   </View>
-                  <View style={{width: 480, height: 200, backgroundColor: 'white'}}>
+                  <View style={{width: 400, height: 200, backgroundColor: 'white'}}>
                     <Text h3>{prod.name}</Text>
-                    <Text>{prod.description}</Text>
-                    <Text>UOM: {prod.quantity}</Text>
+                    <Text numberOfLines={2}>Description: {prod.description}</Text>
+                    <Text>Company: {prod.brand}</Text>
+                    <Text>Brand: {prod.brand}</Text>
+                    <Text>Packaging: {prod.quantity}</Text>
                     <Text>Price: Rs. {prod.price}/-({prod.tax_type})</Text>
+                    <Button title={'Add to Cart'}
+                      backgroundColor={'#33BB76'}
+                      onPress={Actions.myCart}/>
                   </View>
                 </View>
+                <Accordion
+                  header={<Icon name="th-list" size={20} color="blue" />}
+                  content={<Text>Product ID: {prod.id} View More Details dnfbvd vjdhfv fdjvd jhbjdvjdvjdf vdbhv djhf v</Text>}
+                  easing="easeOutCubic"
+                  underlayColor="white"
+                />
               </TouchableOpacity>
             </Card>
             <Spacer size={10} />
@@ -106,41 +119,43 @@ class ProductList extends Component {
         <Card>
           <View style={styles.twoButtonView}>
             <TextInput
-              style={{height: 40, borderColor: 'gray', width: 600}}
+              style={{height: 40, borderColor: 'gray', width: 700}}
               onChangeText={(search) => this.setState({search})}
               value={this.state.search}
+              placeholder = "Type Here..."
             />
             <TouchableOpacity activeOpacity={0.8} onPress={goSearchPage}>
               <Icon name="search" size={30} color="blue" />
             </TouchableOpacity>
           </View>
         </Card>
+
         <ScrollView>
           {this.renderProducts()}
         </ScrollView>
-        <Card>
+        <Card containerStyle={{padding: 1}}>
           <View style={styles.twoButtonView}>
             <Button
-              large
+              small
               outlined
               iconRight
               title={'FILTER'}
-              icon={{ name: 'cached' }}
+              icon={{ name: 'filter' }}
               onPress={Actions.comingSoon}
             />
             <Button
               small
               outlined
               iconRight
-              title={'RANGESORT'}
-              icon={{ name: 'cached' }}
+              title={'RANGE'}
+              icon={{ name: 'filter' }}
               onPress={Actions.comingSoon}
             />
             <Button
               small
               outlined
               iconRight
-              title={'Sort'}
+              title={'SORT'}
               icon={{ name: 'cached' }}
               onPress={Actions.comingSoon}
             />

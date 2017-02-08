@@ -126,10 +126,10 @@ var total = 0;
 class OrderSummery extends Component {
   static componentName = 'OrderSummery';
 
-  renderItmes() {
+  renderItems() {
     return CartItems.map(function(prod){
       return(
-        <ScrollView style={[AppStyles.container]}>
+        <ScrollView key={prod.id} style={[AppStyles.container]}>
           <Card>
             <View style={{flex: 1, flexDirection: 'row'}}>
               <TouchableOpacity activeOpacity={0.8} onPress={Actions.productsView}>
@@ -162,12 +162,14 @@ class OrderSummery extends Component {
     return (
       <View style={[AppStyles.container]}>
         <ScrollView>
-          <Spacer size={70} />
-          {this.renderItmes()}
-          {this.renderItmes()}
+          <Spacer size={60} />
+          {this.renderItems()}
+          {this.renderItems()}
+          {this.renderItems()}
         </ScrollView>
-        <Card><Text>Total: Rs. {total}/-</Text></Card>
-        <Card><Text style={{fontFamily: 'Arial', fontSize: 35}}>Total: Rs. {total}/-</Text></Card>
+        <Card><Text h1>Total: Rs. {total}/-</Text></Card>
+        <Card><Text h3>Download PDF</Text></Card>
+        <Spacer size={20} />
       </View>
     );
   }

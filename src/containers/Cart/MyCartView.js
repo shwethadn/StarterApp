@@ -218,7 +218,7 @@ class MyCart extends Component {
     return CartItems.map(function(prod){
       const goDetailsPage = () => Actions.productsView({prod_id: prod.id});
       return(
-        <ScrollView style={[AppStyles.container]}>
+        <ScrollView key={prod.id} style={[AppStyles.container]}>
           <Card>
             <View style={{flex: 1, flexDirection: 'row'}}>
               <TouchableOpacity activeOpacity={0.8} onPress={goDetailsPage}>
@@ -279,6 +279,7 @@ class MyCart extends Component {
           title={'CHECKOUT'}
           onPress={Actions.orderSummery}
         />
+        <Spacer size={20}/>
       </View>
     );
   }
