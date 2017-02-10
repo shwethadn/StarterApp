@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
   },
 });
 
+var productData = [];
 url = "http://192.168.0.113:3000/api/v1/products";
 fetch(url, {method: "GET"}).then((response) => response.json())
   .then((responseData) => {
@@ -48,7 +49,7 @@ fetch(url, {method: "GET"}).then((response) => response.json())
 
 var Accordion = require('react-native-accordion');
 
-var products = "";
+var products = [];
 
 /* Component ==================================================================== */
 class ProductList extends Component {
@@ -116,10 +117,10 @@ class ProductList extends Component {
     const goSearchPage = () => Actions.productsGrid({search: this.state.search});
     return (
       <View style={[AppStyles.container]}>
-        <Card>
+        <Card containerStyle={{padding: 1}}>
           <View style={styles.twoButtonView}>
             <TextInput
-              style={{height: 40, borderColor: 'gray', width: 700}}
+              style={{height: 40, borderColor: 'blue', width: 700}}
               onChangeText={(search) => this.setState({search})}
               value={this.state.search}
               placeholder = "Type Here..."
@@ -129,10 +130,6 @@ class ProductList extends Component {
             </TouchableOpacity>
           </View>
         </Card>
-
-        <ScrollView>
-          {this.renderProducts()}
-        </ScrollView>
         <Card containerStyle={{padding: 1}}>
           <View style={styles.twoButtonView}>
             <Button
@@ -159,9 +156,14 @@ class ProductList extends Component {
               icon={{ name: 'cached' }}
               onPress={Actions.comingSoon}
             />
-            <Spacer size={10} />
+            <Spacer size={5} />
           </View>
         </Card>
+
+        <ScrollView>
+          {this.renderProducts()}
+        </ScrollView>
+        
       </View>
     );
   }

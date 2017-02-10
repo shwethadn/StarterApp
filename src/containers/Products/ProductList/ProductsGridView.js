@@ -107,9 +107,10 @@ class ProductGrid extends Component {
           <Card>
             <View style={styles.twoButtonView}>
               <TextInput
-                style={{height: 40, borderColor: 'gray', width: 600}}
+                style={{height: 40, borderColor: 'blue', width: 700}}
                 onChangeText={(search) => this.setState({search})}
                 value={this.state.search}
+                placeholder = "Type Here..."
               />
               <TouchableOpacity activeOpacity={0.8} onPress={goSearchPage}>
                 <Icon name="search" size={30} color="blue" />
